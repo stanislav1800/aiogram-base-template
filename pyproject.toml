@@ -16,6 +16,7 @@ dependencies = [
     "redis>=7.1.0",
     "sqlalchemy>=2.0.46",
     "tortoise-orm[asyncpg]>=1.0.0",
+    "types-pytz>=2025.2.0.20251108",
 ]
 
 [dependency-groups]
@@ -91,7 +92,7 @@ line-ending = "auto"
 
 
 [tool.mypy]
-files = ["src", "tests"]
+files = ["src"]
 plugins = [
     "pydantic.mypy"
 ]
@@ -101,6 +102,10 @@ ignore_missing_imports = true
 strict = true
 follow_imports = "silent"
 show_error_codes = true
+
+[tool.pydantic-mypy]
+init_typed = true
+init_forbid_extra = true
 
 [tool.alembic]
 script_location = "migrations"

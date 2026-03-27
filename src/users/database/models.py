@@ -1,11 +1,15 @@
 import logging
 from datetime import datetime
+from typing import TYPE_CHECKING
 
 from sqlalchemy import BigInteger, Boolean, DateTime, String, func, true
 from sqlalchemy.orm import Mapped, mapped_column
 
 from src.core.config import settings
 from src.database.base import Base
+
+# if TYPE_CHECKING:
+#     pass
 
 logger = logging.getLogger(__name__)
 
@@ -61,7 +65,7 @@ class Users(Base):
         comment="Когда профиль в последний раз обновлялся",
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (
             "<Users"
             + (f" telegram_id={self.telegram_id}" if self.telegram_id else "")

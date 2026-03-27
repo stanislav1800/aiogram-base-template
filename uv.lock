@@ -44,6 +44,7 @@ dependencies = [
     { name = "redis" },
     { name = "sqlalchemy" },
     { name = "tortoise-orm", extra = ["asyncpg"] },
+    { name = "types-pytz" },
 ]
 
 [package.dev-dependencies]
@@ -67,6 +68,7 @@ requires-dist = [
     { name = "redis", specifier = ">=7.1.0" },
     { name = "sqlalchemy", specifier = ">=2.0.46" },
     { name = "tortoise-orm", extras = ["asyncpg"], specifier = ">=1.0.0" },
+    { name = "types-pytz", specifier = ">=2025.2.0.20251108" },
 ]
 
 [package.metadata.requires-dev]

@@ -1,6 +1,6 @@
 import logging
 
-from aiogram import Router
+from aiogram import F, Router
 from aiogram.filters import Command, CommandObject, CommandStart
 from aiogram.types import Message
 from aiogram_dialog import DialogManager, StartMode
@@ -13,13 +13,13 @@ logger = logging.getLogger()
 router = Router(name=__name__)
 
 
-@router.message(CommandStart(), IsSuperuser())
+@router.message(CommandStart(magic=F.args), IsSuperuser())
 async def admin_cmd_start(
     message: Message,
     dialog_manager: DialogManager,
     command: CommandObject,
     current_user: UserSchema,
-):
+) -> None:
     logger.info("admin")
     logger.info(current_user.__dict__)
     if command.args:
@@ -34,18 +34,18 @@ async def cmd_start(
     dialog_manager: DialogManager,
     command: CommandObject,
     current_user: UserSchema,
-):
+) -> None:
     logger.info("user")
     logger.info(current_user.__dict__)
 
 
-@router.message(Command("test_error"))
-async def test_error_handler(message: Message):
-    raise RuntimeError("Тестовая ошибка для проверки middleware")
-
-
 @router.message(Command("users"), flags={"access": ["superuser"]})
-async def cmd_users(message: Message, dialog_manager: DialogManager, command: CommandObject, current_user: UserSchema):
+async def cmd_users(
+    message: Message,
+    dialog_manager: DialogManager,
+    command: CommandObject,
+    current_user: UserSchema,
+) -> None:
     logger.info(command)
     if command.args:
         if command.args.isdigit():
